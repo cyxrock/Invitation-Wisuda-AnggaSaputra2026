@@ -84,8 +84,8 @@
             right: 0;
             bottom: 0;
             width: 100%; 
-            height: 100vh; /* Fallback untuk browser lama */
-            height: 100dvh; /* Menyesuaikan layar HP secara presisi */
+            height: 100vh; 
+            height: 100dvh; 
             background: var(--bg-gradient);
             z-index: 9999;
             display: flex; 
@@ -151,7 +151,6 @@
             overflow: hidden;
         }
 
-        /* ORNAMEN BUNGA DI POJOK CARD */
         .card-flower-tl { position: absolute; top: 10px; left: 10px; font-size: 1.2rem; opacity: 0.8; animation: rotateSlow 8s linear infinite; }
         .card-flower-tr { position: absolute; top: 10px; right: 10px; font-size: 1.2rem; opacity: 0.8; animation: rotateSlow 8s linear infinite reverse; }
 
@@ -160,7 +159,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* IKON BUNGA BERGOYANG */
         .sway-flower {
             display: inline-block;
             animation: sway 2.5s ease-in-out infinite;
@@ -218,6 +216,14 @@
         .event-box p { font-size: 0.8rem; color: var(--text-gray); margin-bottom: 5px; }
         .btn-link { font-size: 0.8rem; color: #d81b60; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;}
 
+        /* === STATISTIK KEHADIRAN (BERADA DI RSVP) === */
+        .stats-container { display: flex; justify-content: center; gap: 10px; margin: 15px 0 20px; }
+        .stat-badge {
+            padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
+            background: white; border: 1px solid #ffc0cb; display: inline-flex; align-items: center; gap: 6px;
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+        }
+
         /* === FORM STYLING === */
         .form-group { text-align: left; margin-bottom: 15px; }
         .form-group label { display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; color: var(--text-dark);}
@@ -254,16 +260,9 @@
         .btn-salin:hover { background: #ad1457; }
 
         /* === 5. UCAPAN & DOA === */
-        .stats-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        .stat-badge {
-            padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
-            background: white; border: 1px solid #ffc0cb; display: inline-flex; align-items: center; gap: 6px;
-            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
-        }
-        
         .comments-list {
             max-height: 380px; overflow-y: auto; text-align: left;
-            padding-right: 6px; margin-top: 15px;
+            padding-right: 6px; margin-top: 20px;
         }
         .comments-list::-webkit-scrollbar { width: 6px; }
         .comments-list::-webkit-scrollbar-track { background: #ffe6f0; border-radius: 10px; }
@@ -347,7 +346,7 @@
             
             <img src="fotowisuda.jpeg" alt="Foto Wisudawan" class="profile-img">
             
-            <h3 class="profile-name">I Putu Angga Dharma Saputra, S.Tr.T.</h3>
+            <h3 class="profile-name">I Putu Angga Dharma Saputra, S.Tr.T. </h3>
             <p class="profile-desc">Wisuda XXXVIII Politeknik Negeri Bali<br><span style="color: #d81b60; font-weight: 700;">POLITEKNIK NEGERI BALI</span></p>
         </div>
 
@@ -389,8 +388,14 @@
             <span class="card-flower-tl">🌸</span>
             <span class="card-flower-tr">🌺</span>
             <h2><span class="sway-flower">🌷</span> Konfirmasi RSVP</h2>
-            <p style="font-size: 0.85rem; color: var(--text-gray); margin: 10px 0 20px;">Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan acara dengan baik.</p>
+            <p style="font-size: 0.85rem; color: var(--text-gray); margin: 10px 0 15px;">Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan acara dengan baik.</p>
             
+            <!-- AKUMULASI STATISTIK KEHADIRAN (DIPINDAHKAN KE SINI) -->
+            <div class="stats-container">
+                <div class="stat-badge">🥳 <span id="count-hadir" style="color:#43a047;">0</span> Hadir</div>
+                <div class="stat-badge">🥺 <span id="count-tidak" style="color:#e53935;">0</span> Tidak Hadir</div>
+            </div>
+
             <form id="rsvp-form">
                 <div class="form-group">
                     <label>Nama Lengkap</label>
@@ -444,11 +449,20 @@
             <h2><span class="sway-flower">💌</span> Ucapan & Doa</h2>
             <div style="width: 50px; height: 3px; background: #ff69b4; margin: 10px auto 20px; border-radius:2px;"></div>
 
-            <!-- Total Statistik Kehadiran -->
-            <div class="stats-container">
-                <div class="stat-badge">🥳 <span id="count-hadir" style="color:#43a047;">0</span> Hadir</div>
-                <div class="stat-badge">🥺 <span id="count-tidak" style="color:#e53935;">0</span> Tidak Hadir</div>
-            </div>
+            <!-- Form Input Ucapan & Doa -->
+            <form id="form-ucapan-langsung" style="margin-bottom: 20px;">
+                <div class="form-group">
+                    <label>Nama Anda</label>
+                    <input type="text" id="input_nama_ucapan" class="form-control" placeholder="Tuliskan nama Anda..." required>
+                </div>
+                <div class="form-group">
+                    <label>Ucapan & Doa</label>
+                    <textarea id="input_pesan_ucapan" class="form-control" rows="3" placeholder="Tuliskan ucapan & doa untuk Anggasss..." required></textarea>
+                </div>
+                <button type="button" class="btn-gradient" onclick="kirimUcapanLangsung()">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Ucapan
+                </button>
+            </form>
 
             <!-- Container List Komentar (Scrollable) -->
             <div class="comments-list" id="comments-container">
@@ -557,18 +571,18 @@
         document.getElementById('count-hadir').innerText = countHadirVal;
         document.getElementById('count-tidak').innerText = countTidakVal;
 
-        // 6. PROSES RSVP & TAMBAH UCAPAN
+        // 6. PROSES RSVP VIA WA & OTOMATIS TAMBAH STATISTIK KEHADIRAN
         function kirimWA() {
             const nama = document.getElementById('nama_tamu').value.trim();
             const kehadiran = document.querySelector('input[name="kehadiran"]:checked').value;
             const pesan = document.getElementById('pesan_tamu').value.trim();
             
             if(nama === "") {
-                alert("Mohon isi Nama Lengkap Anda.");
+                alert("Mohon isi Nama Lengkap Anda terlebih dahulu.");
                 return;
             }
 
-            // A. Akumulasi Angka Statistik
+            // A. Akumulasi Angka Statistik Otomatis
             const isHadir = kehadiran === "Hadir";
             if (isHadir) {
                 countHadirVal++;
@@ -578,7 +592,7 @@
                 document.getElementById('count-tidak').innerText = countTidakVal;
             }
 
-            // B. Buat Kartu Komentar Baru
+            // B. Buat Kartu Komentar Baru di Ucapan & Doa
             const today = new Date();
             const dateStr = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
 
@@ -618,6 +632,40 @@
             // D. Bersihkan input form
             document.getElementById('nama_tamu').value = "";
             document.getElementById('pesan_tamu').value = "";
+        }
+
+        // 7. PROSES KIRIM UCAPAN LANGSUNG (DARI CARD UCAPAN & DOA)
+        function kirimUcapanLangsung() {
+            const nama = document.getElementById('input_nama_ucapan').value.trim();
+            const pesan = document.getElementById('input_pesan_ucapan').value.trim();
+
+            if (nama === "" || pesan === "") {
+                alert("Mohon isi Nama dan Ucapan & Doa Anda terlebih dahulu.");
+                return;
+            }
+
+            const today = new Date();
+            const dateStr = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+
+            commentItem.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">
+                        <i class="fa-solid fa-user"></i> ${escapeHtml(nama)}
+                    </span>
+                    <span class="comment-date">${dateStr}</span>
+                </div>
+                <div class="comment-body">"${escapeHtml(pesan)}"</div>
+            `;
+
+            const container = document.getElementById('comments-container');
+            container.insertBefore(commentItem, container.firstChild);
+
+            // Reset input form ucapan
+            document.getElementById('input_nama_ucapan').value = "";
+            document.getElementById('input_pesan_ucapan').value = "";
         }
 
         function escapeHtml(string) {
