@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Wisuda - I Putu Angga Dharma Saputra</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* === VARIABEL WARNA SERBA PINK === */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #ffe6f0 0%, #ffc0cb 50%, #ffb6c1 100%);
+            --card-bg: rgba(255, 255, 255, 0.94);
+            --text-dark: #4a2e35;
+            --text-gray: #7a5c65;
+            --primary-color: #ff1493;    /* Deep Pink */
+            --pink-accent: #ff69b4;     /* Hot Pink */
+            --pink-soft: #ffe4e1;       /* Misty Rose */
+            --btn-gradient: linear-gradient(135deg, #ff69b4, #ff1493);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-dark);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        body.locked { overflow-y: hidden; }
+
+        h1, h2, h3 { 
+            font-family: 'Fredoka One', cursive; 
+            color: var(--primary-color); 
+            letter-spacing: 1px;
+        }
+        
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 20px;
+            padding-bottom: 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === ANIMASI BUNGA BERGUGURAN (BACKGROUND) === */
+        .petal {
+            position: fixed;
+            top: -10%;
+            font-size: 1.2rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: 1;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0.9;
+            }
+            100% {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0.2;
+            }
+        }
+
+        /* === 1. HALAMAN SAMPUL (COVER) === */
+        #cover-page {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: var(--bg-gradient);
+            z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+        
+        #cover-page.open { transform: translateY(-100%); }
+
+        .cover-card {
+            background: var(--card-bg);
+            padding: 40px 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(255, 105, 180, 0.25);
+            width: 90%; max-width: 400px;
+            border: 3px solid #fff;
+            position: relative;
+            animation: floatCard 4s ease-in-out infinite;
+        }
+        
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .cover-card .to { font-size: 0.9rem; font-weight: 700; color: #ff1493; text-transform: uppercase; letter-spacing: 2px;}
+        .cover-card h1 { font-size: 1.8rem; margin: 10px 0 15px; color: var(--primary-color);}
+        .cover-card p { font-size: 0.9rem; color: var(--text-gray); margin-bottom: 25px; line-height: 1.5;}
+
+        /* === TOMBOL GRADASI BERGERAK (PULSE) === */
+        .btn-gradient {
+            background: var(--btn-gradient);
+            color: white; border: none; padding: 14px 30px;
+            border-radius: 30px; font-size: 1rem; font-weight: 700;
+            font-family: 'Quicksand', sans-serif; cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            text-decoration: none; width: 100%;
+            animation: pulseBtn 2s infinite;
+        }
+
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(255, 20, 147, 0.6); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 20, 147, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 20, 147, 0); }
+        }
+
+        .btn-gradient:hover { transform: scale(1.03); }
+
+        /* === KOTAK KONTEN (CARD) UMUM === */
+        .section-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 30px 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.15);
+            text-align: center;
+            border: 2px solid #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* ORNAMEN BUNGA DI POJOK CARD */
+        .card-flower-tl { position: absolute; top: 10px; left: 10px; font-size: 1.2rem; opacity: 0.8; animation: rotateSlow 8s linear infinite; }
+        .card-flower-tr { position: absolute; top: 10px; right: 10px; font-size: 1.2rem; opacity: 0.8; animation: rotateSlow 8s linear infinite reverse; }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* IKON BUNGA BERGOYANG */
+        .sway-flower {
+            display: inline-block;
+            animation: sway 2.5s ease-in-out infinite;
+        }
+
+        @keyframes sway {
+            0%, 100% { transform: rotate(-10deg); }
+            50% { transform: rotate(10deg); }
+        }
+
+        /* === 2. PROFIL === */
+        .badge { 
+            background: #ffe4e1; 
+            color: #d81b60; 
+            padding: 6px 16px; 
+            border-radius: 20px; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            display: inline-block; 
+            margin-bottom: 15px;
+            border: 1px solid #ffb6c1;
+        }
+        
+        .profile-img {
+            width: 150px; height: 150px; border-radius: 50%; object-fit: cover;
+            border: 5px solid white; box-shadow: 0 0 0 4px var(--pink-accent), 0 8px 20px rgba(255, 20, 147, 0.3);
+            margin: 15px auto; display: block;
+            animation: floatImg 3s ease-in-out infinite;
+        }
+
+        @keyframes floatImg {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-8px) scale(1.02); }
+        }
+
+        .profile-name { font-size: 1.5rem; margin-top: 15px; color: var(--primary-color);}
+        .profile-desc { font-size: 0.9rem; color: var(--text-gray); font-weight: 600; margin-top: 5px;}
+
+        /* === 3. SAVE THE DATE === */
+        .countdown-container { display: flex; justify-content: center; gap: 10px; margin: 20px 0; }
+        .countdown-box {
+            background: #fff0f5; border: 1px solid #ffb6c1; border-radius: 15px;
+            padding: 10px 5px; width: 65px; box-shadow: 0 4px 10px rgba(255, 105, 180, 0.15);
+            border-bottom: 4px solid var(--pink-accent);
+            transition: transform 0.3s;
+        }
+        .countdown-box:hover { transform: translateY(-5px); }
+        .countdown-box span { display: block; font-size: 1.5rem; font-weight: 700; color: var(--primary-color); }
+        .countdown-box small { font-size: 0.7rem; color: var(--text-gray); font-weight: 600; text-transform: uppercase;}
+
+        .event-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .event-box { background: #fff0f5; padding: 20px 10px; border-radius: 18px; border: 1px solid #ffc0cb; }
+        .event-icon { font-size: 1.6rem; color: var(--primary-color); margin-bottom: 10px; }
+        .event-box h4 { font-size: 0.9rem; color: var(--text-dark); margin-bottom: 8px; font-family: 'Quicksand', sans-serif; font-weight: 700;}
+        .event-box p { font-size: 0.8rem; color: var(--text-gray); margin-bottom: 5px; }
+        .btn-link { font-size: 0.8rem; color: #d81b60; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 5px; margin-top: 10px;}
+
+        /* === FORM STYLING === */
+        .form-group { text-align: left; margin-bottom: 15px; }
+        .form-group label { display: block; font-size: 0.9rem; font-weight: 700; margin-bottom: 5px; color: var(--text-dark);}
+        .form-control { 
+            width: 100%; padding: 12px; border: 1.5px solid #ffc0cb; border-radius: 12px;
+            font-family: 'Quicksand', sans-serif; font-size: 0.9rem; background: #fffafc;
+        }
+        .form-control:focus { outline: none; border-color: var(--primary-color); background: white; }
+        
+        .radio-group { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .radio-label {
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            border: 1.5px solid #ffc0cb; padding: 10px; border-radius: 12px; cursor: pointer;
+            font-size: 0.9rem; font-weight: 600; background: #fffafc; transition: 0.2s;
+        }
+        .radio-label input { display: none; }
+        .radio-label input:checked + span { color: var(--primary-color); }
+        .radio-label:has(input:checked) { border-color: var(--primary-color); background: #ffe6f0; }
+
+        /* === 4. DIGITAL ENVELOPE === */
+        .bank-card {
+            border: 2px dashed #ff69b4; border-radius: 18px; padding: 20px;
+            margin-bottom: 15px; background: #fff0f5; text-align: center;
+        }
+        .bank-card h4 { font-family: 'Quicksand', sans-serif; font-size: 1.1rem; color: var(--text-dark); margin-bottom: 5px;}
+        .bank-card p { font-size: 0.85rem; color: var(--text-gray); margin-bottom: 10px; }
+        .bank-card .rekening { font-size: 1.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; letter-spacing: 1px;}
+        .btn-salin { 
+            background: #d81b60; color: white; border: none; padding: 8px 20px; 
+            border-radius: 20px; font-size: 0.8rem; font-family: 'Quicksand', sans-serif; 
+            cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+            transition: 0.2s;
+        }
+        .btn-salin:hover { background: #ad1457; }
+
+        /* === 5. UCAPAN & DOA === */
+        .stats-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .stat-badge {
+            padding: 8px 18px; border-radius: 20px; font-size: 0.85rem; font-weight: 700;
+            background: white; border: 1px solid #ffc0cb; display: inline-flex; align-items: center; gap: 6px;
+            box-shadow: 0 2px 8px rgba(255, 105, 180, 0.1);
+        }
+        
+        .comments-list {
+            max-height: 380px; overflow-y: auto; text-align: left;
+            padding-right: 6px; margin-top: 15px;
+        }
+        .comments-list::-webkit-scrollbar { width: 6px; }
+        .comments-list::-webkit-scrollbar-track { background: #ffe6f0; border-radius: 10px; }
+        .comments-list::-webkit-scrollbar-thumb { background: var(--pink-accent); border-radius: 10px; }
+
+        .comment-item {
+            background: white; border-radius: 15px; padding: 15px;
+            margin-bottom: 12px; border: 1px solid #ffe4e1;
+            border-left: 4px solid var(--primary-color);
+            box-shadow: 0 2px 10px rgba(255, 105, 180, 0.08);
+        }
+        .comment-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; }
+        .comment-author { font-weight: 700; font-size: 0.95rem; color: var(--text-dark); display: flex; align-items: center; gap: 6px;}
+        .comment-date { font-size: 0.75rem; color: var(--text-gray); }
+        .comment-badge-hadir {
+            display: inline-block; font-size: 0.75rem; font-weight: 700; color: #43a047;
+            background: #e8f5e9; padding: 2px 8px; border-radius: 8px; margin-left: 5px;
+        }
+        .comment-badge-tidak {
+            display: inline-block; font-size: 0.75rem; font-weight: 700; color: #e53935;
+            background: #ffebee; padding: 2px 8px; border-radius: 8px; margin-left: 5px;
+        }
+        .comment-body {
+            font-size: 0.9rem; color: #444; background: #fffafc;
+            padding: 10px; border-radius: 8px; margin-top: 8px;
+            border: 1px solid #ffe4e1; line-height: 1.4;
+        }
+
+        /* === TOMBOL MUSIK MENGAMBANG === */
+        .music-btn {
+            position: fixed; bottom: 20px; right: 20px; z-index: 999;
+            width: 50px; height: 50px; border-radius: 50%;
+            background: linear-gradient(135deg, #ff69b4, #ff1493);
+            border: 3px solid white; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+            color: white; font-size: 1.2rem; display: flex; align-items: center; justify-content: center;
+            cursor: pointer; animation: spin 4s linear infinite; display: none;
+        }
+        .music-btn.paused { animation: none; background: #999; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        
+        footer { text-align: center; padding: 20px 0; }
+        footer p { font-size: 0.8rem; color: var(--text-gray); }
+        footer h3 { font-size: 1.2rem; margin-top: 5px; color: var(--primary-color);}
+
+    </style>
+</head>
+<body class="locked">
+
+    <!-- AUDIO BACKSOUND -->
+    <audio id="bg-music" loop>
+        <source src="Emotional Renegades.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- TOMBOL KONTROL MUSIK -->
+    <button class="music-btn" id="music-control">
+        <i class="fa-solid fa-compact-disc"></i>
+    </button>
+
+    <!-- 1. HALAMAN SAMPUL (COVER) -->
+    <div id="cover-page">
+        <div class="cover-card">
+            <p class="to">🌸 Kepada Yth. 🌸</p>
+            <h1>Bapak/Ibu/Saudara/i<br>dan Teman-teman</h1>
+            <p>Diundang dengan penuh kebahagiaan untuk merayakan momen spesial Anggasss ✨</p>
+            
+            <button class="btn-gradient" id="btn-buka-undangan">
+                <i class="fa-solid fa-envelope-open-text"></i> Buka Undangan
+            </button>
+        </div>
+    </div>
+
+    <!-- KONTEN UTAMA -->
+    <div class="container">
+
+        <!-- 2. PROFIL -->
+        <div class="section-card">
+            <span class="card-flower-tl">🌸</span>
+            <span class="card-flower-tr">🌺</span>
+            <span class="badge"><i class="fa-solid fa-graduation-cap"></i> Undangan Spesial</span>
+            <h2 style="font-size: 1.8rem; margin: 15px 0;">Akhirnya Anggasss Wisuda! 🎓</h2>
+            
+            <img src="fotowisuda.jpeg" alt="Foto Wisudawan" class="profile-img">
+            
+            <h3 class="profile-name">I Putu Angga Dharma Saputra</h3>
+            <p class="profile-desc">Wisuda XXXVIII Politeknik Negeri Bali<br><span style="color: #d81b60; font-weight: 700;">POLITEKNIK NEGERI BALI</span></p>
+        </div>
+
+        <!-- 3. SAVE THE DATE -->
+        <div class="section-card">
+            <span class="card-flower-tl">🌷</span>
+            <span class="card-flower-tr">🌸</span>
+            <h2><span class="sway-flower">🌸</span> Save The Date <span class="sway-flower">🌸</span></h2>
+            <div style="width: 50px; height: 3px; background: #ff69b4; margin: 10px auto 20px; border-radius:2px;"></div>
+            
+            <div class="countdown-container">
+                <div class="countdown-box"><span id="hari">00</span><small>Hari</small></div>
+                <div class="countdown-box"><span id="jam">00</span><small>Jam</small></div>
+                <div class="countdown-box"><span id="menit">00</span><small>Menit</small></div>
+                <div class="countdown-box"><span id="detik">00</span><small>Detik</small></div>
+            </div>
+
+            <div class="event-grid">
+                <div class="event-box">
+                    <i class="fa-regular fa-calendar-days event-icon"></i>
+                    <h4>Waktu Acara</h4>
+                    <p>Selasa, 27 Oktober 2026</p>
+                    <p style="color: #ff1493; font-weight: 700;">09.00 - Selesai</p>
+                </div>
+                <div class="event-box">
+                    <i class="fa-solid fa-location-dot event-icon"></i>
+                    <h4>Lokasi Acara</h4>
+                    <p>Balai Budaya Giri Nata Mandala</p>
+                    <p style="font-size: 0.7rem;">Pusat Pemerintahan Kabupaten Badung, Mengwi, Bali</p>
+                    <a href="https://maps.app.goo.gl/..." target="_blank" class="btn-link">
+                        <i class="fa-solid fa-map-location-dot"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. RSVP -->
+        <div class="section-card">
+            <span class="card-flower-tl">🌸</span>
+            <span class="card-flower-tr">🌺</span>
+            <h2><span class="sway-flower">🌷</span> Konfirmasi RSVP</h2>
+            <p style="font-size: 0.85rem; color: var(--text-gray); margin: 10px 0 20px;">Mohon konfirmasi kehadiran Anda agar kami dapat mempersiapkan acara dengan baik.</p>
+            
+            <form id="rsvp-form">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="nama_tamu" class="form-control" placeholder="Masukkan nama Anda..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label>Apakah Anda akan hadir?</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="kehadiran" value="Hadir" checked>
+                            <span>🥳 Ya, Hadir</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="kehadiran" value="Tidak Hadir">
+                            <span>🥺 Maaf, Tidak</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Pesan & Doa (Opsional)</label>
+                    <textarea id="pesan_tamu" class="form-control" rows="3" placeholder="Catatan khusus atau ucapan selamat..."></textarea>
+                </div>
+
+                <button type="button" class="btn-gradient" onclick="kirimWA()">
+                    <i class="fa-solid fa-paper-plane"></i> Kirim Konfirmasi via WA
+                </button>
+            </form>
+        </div>
+
+        <!-- 5. DIGITAL ENVELOPE -->
+        <div class="section-card">
+            <span class="card-flower-tl">🌺</span>
+            <span class="card-flower-tr">🌷</span>
+            <h2><span class="sway-flower">🎁</span> Digital Envelope</h2>
+            <p style="font-size: 0.85rem; color: var(--text-gray); margin: 10px 0 20px;">Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun, jika Anda ingin memberikan tanda kasih, dapat melalui:</p>
+            
+            <div class="bank-card">
+                <h4>Bank BCA</h4>
+                <p>A.n I Putu Angga Dharma Saputra</p>
+                <div class="rekening" id="rek-bca">1420824684</div>
+                <button class="btn-salin" onclick="salinTeks('rek-bca')"><i class="fa-regular fa-copy"></i> Salin Nomor</button>
+            </div>
+        </div>
+
+        <!-- 6. UCAPAN & DOA -->
+        <div class="section-card">
+            <span class="card-flower-tl">🌸</span>
+            <span class="card-flower-tr">🌸</span>
+            <h2><span class="sway-flower">💌</span> Ucapan & Doa</h2>
+            <div style="width: 50px; height: 3px; background: #ff69b4; margin: 10px auto 20px; border-radius:2px;"></div>
+
+            <!-- Total Statistik Kehadiran -->
+            <div class="stats-container">
+                <div class="stat-badge">🥳 <span id="count-hadir" style="color:#43a047;">0</span> Hadir</div>
+                <div class="stat-badge">🥺 <span id="count-tidak" style="color:#e53935;">0</span> Tidak Hadir</div>
+            </div>
+
+            <!-- Container List Komentar (Scrollable) -->
+            <div class="comments-list" id="comments-container">
+                <!-- Komentar awal / contoh bawaan -->
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">
+                            <i class="fa-solid fa-user"></i> Joko Widodo
+                            <span class="comment-badge-hadir">Hadir</span>
+                        </span>
+                        <span class="comment-date">13/9/2026</span>
+                    </div>
+                    <div class="comment-body">"CONGRATULATION ANAK MUDA 🥂🎉"</div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Terima kasih atas doa & restunya 🌸</p>
+            <h3>I Putu Angga Dharma Saputra</h3>
+        </footer>
+
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // EFEK KELOPAK BUNGA BERGUGURAN OTOMATIS
+        function createPetals() {
+            const flowerTypes = ['🌸', '🌺', '🌷', '🏵️'];
+            for (let i = 0; i < 18; i++) {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.innerText = flowerTypes[Math.floor(Math.random() * flowerTypes.length)];
+                petal.style.left = Math.random() * 100 + 'vw';
+                petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                petal.style.animationDelay = (Math.random() * 5) + 's';
+                petal.style.fontSize = (Math.random() * 10 + 15) + 'px';
+                document.body.appendChild(petal);
+            }
+        }
+        createPetals();
+
+        // 1. FITUR BUKA UNDANGAN & AUDIO
+        const btnBuka = document.getElementById('btn-buka-undangan');
+        const coverPage = document.getElementById('cover-page');
+        const music = document.getElementById('bg-music');
+        const musicBtn = document.getElementById('music-control');
+        
+        btnBuka.addEventListener('click', function() {
+            coverPage.classList.add('open');
+            document.body.classList.remove('locked');
+            musicBtn.style.display = 'flex';
+            music.play().catch(error => console.log("Autoplay dicegah browser."));
+        });
+
+        // 2. KONTROL MUSIK PLAY/PAUSE
+        let isPlaying = true;
+        musicBtn.addEventListener('click', function() {
+            if (isPlaying) {
+                music.pause();
+                musicBtn.classList.add('paused');
+            } else {
+                music.play();
+                musicBtn.classList.remove('paused');
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // 3. COUNTDOWN TIMER
+        const countDownDate = new Date(2026, 9, 27, 9, 0, 0).getTime();
+        const x = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countDownDate - now;
+
+            if (distance < 0) {
+                clearInterval(x);
+                document.getElementById("hari").innerHTML = "00";
+                document.getElementById("jam").innerHTML = "00";
+                document.getElementById("menit").innerHTML = "00";
+                document.getElementById("detik").innerHTML = "00";
+                return;
+            }
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("hari").innerHTML = days < 10 ? '0' + days : days;
+            document.getElementById("jam").innerHTML = hours < 10 ? '0' + hours : hours;
+            document.getElementById("menit").innerHTML = minutes < 10 ? '0' + minutes : minutes;
+            document.getElementById("detik").innerHTML = seconds < 10 ? '0' + seconds : seconds;
+        }, 1000);
+
+        // 4. FITUR SALIN NO REK
+        function salinTeks(idElement) {
+            const teks = document.getElementById(idElement).innerText;
+            navigator.clipboard.writeText(teks).then(() => {
+                alert("Nomor rekening berhasil disalin: " + teks);
+            });
+        }
+
+        // 5. INISIALISASI AWAL STATISTIK KEHADIRAN
+        let countHadirVal = 0;
+        let countTidakVal = 0;
+        document.getElementById('count-hadir').innerText = countHadirVal;
+        document.getElementById('count-tidak').innerText = countTidakVal;
+
+        // 6. PROSES RSVP & TAMBAH UCAPAN
+        function kirimWA() {
+            const nama = document.getElementById('nama_tamu').value.trim();
+            const kehadiran = document.querySelector('input[name="kehadiran"]:checked').value;
+            const pesan = document.getElementById('pesan_tamu').value.trim();
+            
+            if(nama === "") {
+                alert("Mohon isi Nama Lengkap Anda.");
+                return;
+            }
+
+            // A. Akumulasi Angka Statistik
+            const isHadir = kehadiran === "Hadir";
+            if (isHadir) {
+                countHadirVal++;
+                document.getElementById('count-hadir').innerText = countHadirVal;
+            } else {
+                countTidakVal++;
+                document.getElementById('count-tidak').innerText = countTidakVal;
+            }
+
+            // B. Buat Kartu Komentar Baru
+            const today = new Date();
+            const dateStr = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+
+            const commentItem = document.createElement('div');
+            commentItem.className = 'comment-item';
+
+            const badgeHTML = isHadir 
+                ? `<span class="comment-badge-hadir">Hadir</span>` 
+                : `<span class="comment-badge-tidak">Tidak Hadir</span>`;
+
+            const isiPesanHTML = pesan !== "" 
+                ? `<div class="comment-body">"${escapeHtml(pesan)}"</div>` 
+                : `<div class="comment-body" style="font-style: italic; color: #999;">(Konfirmasi kehadiran tanpa pesan)</div>`;
+
+            commentItem.innerHTML = `
+                <div class="comment-header">
+                    <span class="comment-author">
+                        <i class="fa-solid fa-user"></i> ${escapeHtml(nama)}
+                        ${badgeHTML}
+                    </span>
+                    <span class="comment-date">${dateStr}</span>
+                </div>
+                ${isiPesanHTML}
+            `;
+
+            // Masukkan ke urutan teratas
+            const container = document.getElementById('comments-container');
+            container.insertBefore(commentItem, container.firstChild);
+
+            // C. Buka WhatsApp
+            const nomorWA = "6281246385588"; 
+            let textWA = `Halo, saya ingin konfirmasi RSVP Undangan Wisuda.%0A%0A*Nama:* ${nama}%0A*Status Kehadiran:* ${kehadiran}`;
+            if(pesan !== "") { textWA += `%0A*Pesan:* ${pesan}`; }
+
+            window.open(`https://wa.me/${nomorWA}?text=${textWA}`, "_blank");
+
+            // D. Bersihkan input form
+            document.getElementById('nama_tamu').value = "";
+            document.getElementById('pesan_tamu').value = "";
+        }
+
+        function escapeHtml(string) {
+            return String(string).replace(/[&<>"']/g, function(s) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[s];
+            });
+        }
+    </script>
+</body>
+</html>
